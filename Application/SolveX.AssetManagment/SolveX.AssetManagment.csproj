@@ -11,6 +11,7 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
     <PackageReference Include="NLog" Version="5.1.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
@@ -19,10 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj" />
+    <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.ApplicationServices\SolveX.Business.Users.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.Integration\SolveX.Business.Users.Integration.csproj" />
     <ProjectReference Include="..\..\Framework\SolveX.Framework.Integration\SolveX.Framework.Integration.csproj" />
     <ProjectReference Include="..\..\Framework\SolveX.Framework.WebAPI\SolveX.Framework.WebAPI.csproj" />
   </ItemGroup>
