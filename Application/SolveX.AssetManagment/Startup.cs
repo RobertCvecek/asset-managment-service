@@ -3,12 +3,18 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
+using SolveX.Business.Users.ApplicationServices;
+using SolveX.Business.Users.Domain;
+using SolveX.Business.Users.Integration;
+using SolveX.Business.Users.Integration.Context;
 using SolveX.Framework.Integration;
 using SolveX.Framework.WebAPI.Middleware;
 using SolveX.Framework.WebAPI.Models;
+using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -131,6 +137,9 @@ public class Startup
                .SingleInstance();
 
         builder.RegisterModule(new FrameworkIntegrationModule());
+        builder.RegisterModule(new UserApplicationModule());
+        builder.RegisterModule(new UserDomainModule());
+        builder.RegisterModule(new UserIntegrationModule());
 
         List<Assembly> listOfAssemblies = new List<Assembly>();
         var mainAsm = Assembly.GetEntryAssembly();
@@ -150,6 +159,12 @@ public class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+        {
+            var context = serviceScope.ServiceProvider.GetService <UserContext> ();
+            context.Database.Migrate();
+        }
+
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
