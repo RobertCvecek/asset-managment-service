@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.5.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj" />
+    <ProjectReference Include="..\SolveX.Business.Users.Domain\SolveX.Business.Users.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
