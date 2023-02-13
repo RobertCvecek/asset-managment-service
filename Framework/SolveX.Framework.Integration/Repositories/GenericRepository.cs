@@ -29,7 +29,13 @@ namespace SolveX.Framework.Integration.Repositories;
             return await _dbContext.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<int> InsertAsync(IEnumerable<T> entity)
+        {
+            _dbContext.Set<T>().AddRange(entity);
+            return await _dbContext.SaveChangesAsync();
+        }
+
+    public async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
