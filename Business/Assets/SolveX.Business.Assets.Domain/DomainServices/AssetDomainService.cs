@@ -13,13 +13,15 @@ namespace SolveX.Business.Assets.Domain.DomainServices;
 public class AssetDomainService : IAssetDomainService
 {
     private readonly IAssetRepository _assetRepository;
+    private readonly IAssetConnectionRepository _assetConnectionRepository;
 
-    public AssetDomainService(IAssetRepository assetRepository)
+    public AssetDomainService(IAssetRepository assetRepository, IAssetConnectionRepository assetConnectionRepository)
     {
+        _assetConnectionRepository= assetConnectionRepository;
         _assetRepository = assetRepository;
     }
 
-    public async Task<int> Create(int id, string title, string data)
+    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links)
     {
         if (await _assetRepository.GetAsync(id) is not null)
         {
@@ -47,7 +49,25 @@ public class AssetDomainService : IAssetDomainService
             throw new BadDataException("The JSON is not valid");
         }
 
+        foreach(int link in links)
+        {
+            if (await _assetRepository.GetAsync(link) is null)
+            {
+                throw new BadDataException($"The asset with id [{link}] does not exist. Connection cannot be created");
+            }
+        }
+
         await _assetRepository.InsertAsync(new Asset { Title = title, Data = data, Id = id });
+
+        if(links.Any())
+        {
+            await _assetConnectionRepository.InsertAsync(links.Select(link => new AssetConnection()
+            {
+                AssetId = id,
+                ConnectedTo = link,
+            }));
+        }
+        
 
         return id;
     }
@@ -79,5 +99,15 @@ public class AssetDomainService : IAssetDomainService
         });
     }
 
-   
+    public async Task<IEnumerable<Asset>> GetLinkedAssets(int assetId)
+    {
+        List<AssetConnection> assetsConnections = await _assetConnectionRepository.Query().Where(assetConnection => assetConnection.AssetId == assetId).ToListAsync();
+
+        List<Asset> assets= new List<Asset>();
+        foreach (AssetConnection assetConnection in assetsConnections)
+        {
+            assets.Add(await _assetRepository.GetAsync(assetConnection.ConnectedTo));
+        }
+        return assets;
+    }
 }
