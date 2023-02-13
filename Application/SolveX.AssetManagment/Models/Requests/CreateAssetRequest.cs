@@ -8,8 +8,13 @@ public class CreateAssetRequest
     public int Id { get; set; }
 
     [Required]
-    public string Title { get; set; }
+    public string Title { get; set; } = String.Empty;
 
     [Required]
-    public string Data { get; set; }
+    public string Data { get; set; } = String.Empty;
+
+    /// <summary>
+    /// Id's of assets that the current asset is linked to
+    /// </summary>
+    public IEnumerable<int> Links { get; set; }
 }

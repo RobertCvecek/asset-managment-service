@@ -36,7 +36,7 @@ public class AssetController : ControllerBase
     [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody]CreateAssetRequest request)
     {
-        int id = await _assetService.Create(request.Id, request.Title, request.Data);
+        int id = await _assetService.Create(request.Id, request.Title, request.Data, request.Links);
         return Ok(id);
     }
 
@@ -90,4 +90,22 @@ public class AssetController : ControllerBase
         }
         return Ok(asset);
     }
+
+    [HttpGet("linked/{id}")]
+    [ProducesResponseType(typeof(RegisterResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetLinkedAssets([FromRoute] int id)
+    {
+        IEnumerable<AssetDto> assets = await _assetService.GetLinkedAssets(id);
+
+        if (assets == null && assets.Any())
+        {
+            return NotFound();
+        }
+        return Ok(assets);
+    }
+
 }
