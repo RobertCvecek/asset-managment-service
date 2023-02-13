@@ -10,4 +10,6 @@ public interface IGenericRepository<T>
     public Task UpdateAsync(T entity);
 
     public Task DeleteAsync(int id);
+
+    public Task<int> InsertAsync(IEnumerable<T> entities);
 }
