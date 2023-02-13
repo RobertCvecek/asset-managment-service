@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.API\SolveX.Business.Assets.API.csproj" />
+    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.ApplicationServices\SolveX.Business.Assets.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.Domain\SolveX.Business.Assets.Domain.csproj" />
+    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.Integration\SolveX.Business.Assets.Integration.csproj" />
     <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj" />
     <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.ApplicationServices\SolveX.Business.Users.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.Integration\SolveX.Business.Users.Integration.csproj" />
