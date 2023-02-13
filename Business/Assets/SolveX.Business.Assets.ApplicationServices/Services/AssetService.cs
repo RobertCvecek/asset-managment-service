@@ -15,9 +15,9 @@ public class AssetService : IAssetService
         _mapper = mapper;
     }
 
-    public async Task<int> Create(int id, string title, string data)
+    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links)
     {
-        return await _assetDomainService.Create(id, title, data);
+        return await _assetDomainService.Create(id, title, data, links);
     }
 
     public async Task<AssetDto> Get(int id)
@@ -33,5 +33,10 @@ public class AssetService : IAssetService
     public async Task<AssetDto> Get(string atribute, string attributeValue)
     {
         return _mapper.Map<AssetDto>(await _assetDomainService.Get(atribute, attributeValue));
+    }
+
+    public async Task<IEnumerable<AssetDto>> GetLinkedAssets(int assetId)
+    {
+        return _mapper.Map<IEnumerable<AssetDto>>(await _assetDomainService.GetLinkedAssets(assetId));
     }
 }
