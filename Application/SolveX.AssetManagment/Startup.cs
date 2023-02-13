@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
+using SolveX.Business.Assets.ApplicationServices;
+using SolveX.Business.Assets.Domain;
+using SolveX.Business.Assets.Integration.Context;
 using SolveX.Business.Users.ApplicationServices;
 using SolveX.Business.Users.Domain;
 using SolveX.Business.Users.Integration;
@@ -140,6 +143,9 @@ public class Startup
         builder.RegisterModule(new UserApplicationModule());
         builder.RegisterModule(new UserDomainModule());
         builder.RegisterModule(new UserIntegrationModule());
+        builder.RegisterModule(new AssetIntegrationModule());
+        builder.RegisterModule(new AssetApplicationModule());
+        builder.RegisterModule(new AssetDomainModule());
 
         List<Assembly> listOfAssemblies = new List<Assembly>();
         var mainAsm = Assembly.GetEntryAssembly();
@@ -161,8 +167,10 @@ public class Startup
     {
         using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var context = serviceScope.ServiceProvider.GetService <UserContext> ();
-            context.Database.Migrate();
+            var userContext = serviceScope.ServiceProvider.GetService <UserContext> ();
+            var assetContext = serviceScope.ServiceProvider.GetService <AssetContext> ();
+            userContext.Database.Migrate();
+            assetContext.Database.Migrate();
         }
 
         if (env.IsDevelopment())
