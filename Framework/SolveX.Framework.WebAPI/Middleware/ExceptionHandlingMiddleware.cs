@@ -36,6 +36,11 @@ public class ExceptionHandlingMiddleware
             _logger.LogError($"Exception occurred with message [{e.Message}], trace [{Activity.Current?.Id ?? context?.TraceIdentifier}] and status code [{GetStatusCode(e)}]");
 
             var response = context?.Response;
+
+            if(response is null || context is null)
+            {
+                throw;
+            }
             if (response.HasStarted)
             {
                 throw;
