@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{83
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{D5874367-E8C6-40BE-AFC7-A1351AC4DD95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.AssetManagment", "Application\SolveX.AssetManagment\SolveX.AssetManagment.csproj", "{8F1A6FCD-0B4E-4985-9CD9-565070DC476C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.AssetManagment", "Application\SolveX.AssetManagment\SolveX.AssetManagment.csproj", "{8F1A6FCD-0B4E-4985-9CD9-565070DC476C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{8835627B-54A3-4BD6-9F7A-3481D207852B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Business.Users.API", "Business\Users\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj", "{70E21FA4-8698-4818-A965-B8D7107785FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Users.API", "Business\Users\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj", "{70E21FA4-8698-4818-A965-B8D7107785FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Framework.Domain", "Framework\SolveX.Framework.Domain\SolveX.Framework.Domain.csproj", "{487880D6-16E7-4DDA-AAB6-EFDC7A373DE6}"
 EndProject
@@ -23,11 +23,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Framework.TestingUti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Framework.WebAPI", "Framework\SolveX.Framework.WebAPI\SolveX.Framework.WebAPI.csproj", "{25E4FE48-4730-4CE0-B788-AF85FD03F51C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Business.Users.ApplicationServices", "Business\Users\SolveX.Business.Users.ApplicationServices\SolveX.Business.Users.ApplicationServices.csproj", "{613412AD-BDBB-4D55-8063-7EB9764851F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Users.ApplicationServices", "Business\Users\SolveX.Business.Users.ApplicationServices\SolveX.Business.Users.ApplicationServices.csproj", "{613412AD-BDBB-4D55-8063-7EB9764851F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Business.Users.Domain", "Business\Users\SolveX.Business.Users.Domain\SolveX.Business.Users.Domain.csproj", "{BBF4D33F-C672-447E-AA17-D65ADBF7CF3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Users.Domain", "Business\Users\SolveX.Business.Users.Domain\SolveX.Business.Users.Domain.csproj", "{BBF4D33F-C672-447E-AA17-D65ADBF7CF3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Business.Users.Integration", "Business\Users\SolveX.Business.Users.Integration\SolveX.Business.Users.Integration.csproj", "{2E708255-74AC-4D40-AE72-19CCFC532215}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Users.Integration", "Business\Users\SolveX.Business.Users.Integration\SolveX.Business.Users.Integration.csproj", "{2E708255-74AC-4D40-AE72-19CCFC532215}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{215ACFAB-48F9-4795-8125-125B2E503438}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Assets.API", "Business\Assets\SolveX.Business.Assets.API\SolveX.Business.Assets.API.csproj", "{59C886FC-F0A4-413F-BD88-DF64DABB6C50}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Assets.ApplicationServices", "Business\Assets\SolveX.Business.Assets.ApplicationServices\SolveX.Business.Assets.ApplicationServices.csproj", "{8F114B8D-3152-429F-ABBD-176D87BE21AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Assets.Domain", "Business\Assets\SolveX.Business.Assets.Domain\SolveX.Business.Assets.Domain.csproj", "{251808B9-BD03-4D56-8EBF-35B09DC0750F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Assets.Integration", "Business\Assets\SolveX.Business.Assets.Integration\SolveX.Business.Assets.Integration.csproj", "{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{3923020B-70A7-4295-A119-5E69DEC88317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Framework.Utilities.Common", "Framework\Utilities\SolveX.Framework.Utilities.Common\SolveX.Framework.Utilities.Common.csproj", "{77048D46-B9B3-42BB-8DD3-D745EC83F124}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +85,26 @@ Global
 		{2E708255-74AC-4D40-AE72-19CCFC532215}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E708255-74AC-4D40-AE72-19CCFC532215}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E708255-74AC-4D40-AE72-19CCFC532215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C886FC-F0A4-413F-BD88-DF64DABB6C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C886FC-F0A4-413F-BD88-DF64DABB6C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C886FC-F0A4-413F-BD88-DF64DABB6C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C886FC-F0A4-413F-BD88-DF64DABB6C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F114B8D-3152-429F-ABBD-176D87BE21AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F114B8D-3152-429F-ABBD-176D87BE21AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F114B8D-3152-429F-ABBD-176D87BE21AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F114B8D-3152-429F-ABBD-176D87BE21AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{251808B9-BD03-4D56-8EBF-35B09DC0750F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{251808B9-BD03-4D56-8EBF-35B09DC0750F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{251808B9-BD03-4D56-8EBF-35B09DC0750F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{251808B9-BD03-4D56-8EBF-35B09DC0750F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +120,13 @@ Global
 		{613412AD-BDBB-4D55-8063-7EB9764851F7} = {8835627B-54A3-4BD6-9F7A-3481D207852B}
 		{BBF4D33F-C672-447E-AA17-D65ADBF7CF3B} = {8835627B-54A3-4BD6-9F7A-3481D207852B}
 		{2E708255-74AC-4D40-AE72-19CCFC532215} = {8835627B-54A3-4BD6-9F7A-3481D207852B}
+		{215ACFAB-48F9-4795-8125-125B2E503438} = {8382220E-B38D-4389-891E-2D9AA3F9E2C6}
+		{59C886FC-F0A4-413F-BD88-DF64DABB6C50} = {215ACFAB-48F9-4795-8125-125B2E503438}
+		{8F114B8D-3152-429F-ABBD-176D87BE21AD} = {215ACFAB-48F9-4795-8125-125B2E503438}
+		{251808B9-BD03-4D56-8EBF-35B09DC0750F} = {215ACFAB-48F9-4795-8125-125B2E503438}
+		{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3} = {215ACFAB-48F9-4795-8125-125B2E503438}
+		{3923020B-70A7-4295-A119-5E69DEC88317} = {D5874367-E8C6-40BE-AFC7-A1351AC4DD95}
+		{77048D46-B9B3-42BB-8DD3-D745EC83F124} = {3923020B-70A7-4295-A119-5E69DEC88317}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D8E0E85-6101-4DBE-B549-AD83506703E2}
