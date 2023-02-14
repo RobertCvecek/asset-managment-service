@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using ServiceStack;
 using SolveX.Business.Assets.API.Dtos;
 using SolveX.Business.Assets.API.Services;
 using SolveX.Business.Assets.Domain.DomainServices;
 using SolveX.Framework.Utilities.Common;
-using System.IO;
-using System.Text.Json;
 
 namespace SolveX.Business.Assets.ApplicationServices.Services;
 public class AssetService : IAssetService
