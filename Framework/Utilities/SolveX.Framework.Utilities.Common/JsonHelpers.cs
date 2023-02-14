@@ -42,4 +42,27 @@ public static class JsonHelpers
 
         return false;
     }
+
+    public static string GetPropertyValue(string jsonString, string propertyName)
+    {
+        JObject json = JObject.Parse(jsonString);
+
+        // Split the property name by ":" to handle nested properties
+        string[] propertyNames = propertyName.Split(':');
+
+        JToken propertyValue = json;
+        foreach (string propName in propertyNames)
+        {
+            propertyValue = propertyValue[propName];
+
+            // If any property is not found, return null
+            if (propertyValue == null)
+            {
+                return null;
+            }
+        }
+
+        return propertyValue.ToString();
+    }
 }
+
