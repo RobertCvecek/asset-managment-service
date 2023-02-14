@@ -17,4 +17,9 @@ public class CreateAssetRequest
     /// Id's of assets that the current asset is linked to
     /// </summary>
     public IEnumerable<int> Links { get; set; }
+
+    /// <summary>
+    /// Key value pair containg property name and regex for its value validation
+    /// </summary>
+    public Dictionary<string, string> Validations { get; set; }
 }
