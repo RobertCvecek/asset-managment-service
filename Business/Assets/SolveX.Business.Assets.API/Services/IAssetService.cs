@@ -5,6 +5,8 @@ public interface IAssetService
 {
     public Task<int> Create(int id, string title, string data, IEnumerable<int> links);
 
+    public Task<ExcelAssetDto> Export(int id);
+
     public Task<AssetDto> Get(int id);
 
     public Task<AssetDto> Get(string title);
