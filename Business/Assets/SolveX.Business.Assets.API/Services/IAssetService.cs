@@ -3,7 +3,7 @@
 namespace SolveX.Business.Assets.API.Services;
 public interface IAssetService
 {
-    public Task<int> Create(int id, string title, string data, IEnumerable<int> links);
+    public Task<int> Create(int id, string title, string data, IEnumerable<int> links, Dictionary<string,string> validations);
 
     public Task<ExcelAssetDto> Export(int id);
 
