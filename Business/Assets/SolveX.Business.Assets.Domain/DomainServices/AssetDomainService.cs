@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using Newtonsoft.Json.Linq;
 using SolveX.Business.Assets.Domain.Models;
 using SolveX.Business.Assets.Domain.Repositories;
@@ -7,6 +8,7 @@ using SolveX.Framework.Domain.Exceptions;
 using SolveX.Framework.Utilities.Common;
 using System.Numerics;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace SolveX.Business.Assets.Domain.DomainServices;
 
@@ -21,7 +23,7 @@ public class AssetDomainService : IAssetDomainService
         _assetRepository = assetRepository;
     }
 
-    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links)
+    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links, Dictionary<string, string> validations)
     {
         if (await _assetRepository.GetAsync(id) is not null)
         {
@@ -54,6 +56,30 @@ public class AssetDomainService : IAssetDomainService
             if (await _assetRepository.GetAsync(link) is null)
             {
                 throw new BadDataException($"The asset with id [{link}] does not exist. Connection cannot be created");
+            }
+        }
+
+        foreach(KeyValuePair<string,string> kvp in validations)
+        {
+            try
+            {
+                Regex.Match("", kvp.Value);
+            }
+            catch
+            {
+                throw new BadDataException($"The regex {kvp.Value} for {kvp.Key} is not valid");
+            }
+
+            string value = JsonHelpers.GetPropertyValue(data, kvp.Key);
+
+            if(value == null)
+            {
+                throw new BadDataException($"Property with name {kvp.Key} does not exist");
+            }
+
+            if(!Regex.Match(value, kvp.Key).Success)
+            {
+                throw new BadDataException($"The property {kvp.Key} does not meet the crieteria of {kvp.Value}");
             }
         }
 
@@ -110,4 +136,6 @@ public class AssetDomainService : IAssetDomainService
         }
         return assets;
     }
+
+   
 }
