@@ -10,6 +10,7 @@ using SolveX.Business.Users.API.Services;
 using SolveX.Framework.WebAPI.Models;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Security.Claims;
@@ -33,7 +34,6 @@ public class AssetController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    [AllowAnonymous]
     public async Task<IActionResult> Create([FromBody]CreateAssetRequest request)
     {
         int id = await _assetService.Create(request.Id, request.Title, request.Data, request.Links);
@@ -41,16 +41,15 @@ public class AssetController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(LoginResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AssetDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    [AllowAnonymous]
     public async Task<IActionResult> Search([FromRoute] int id)
     {
         AssetDto asset = await _assetService.Get(id);
 
-        if(asset == null)
+        if(asset is null)
         {
             return NotFound();
         }
@@ -58,16 +57,15 @@ public class AssetController : ControllerBase
     }
 
     [HttpGet()]
-    [ProducesResponseType(typeof(LoginResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AssetDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    [AllowAnonymous]
     public async Task<IActionResult> Search([Required][FromQuery] string title)
     {
         AssetDto asset = await _assetService.Get(title);
 
-        if (asset == null)
+        if (asset is null)
         {
             return NotFound();
         }
@@ -75,16 +73,15 @@ public class AssetController : ControllerBase
     }
 
     [HttpGet("attribute")]
-    [ProducesResponseType(typeof(LoginResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AssetDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    [AllowAnonymous]
     public async Task<IActionResult> Search([Required][FromQuery] string attibuteName, [Required][FromQuery] string attibuteValue)
     {
         AssetDto asset = await _assetService.Get(attibuteName, attibuteValue);
 
-        if (asset == null)
+        if (asset is null)
         {
             return NotFound();
         }
@@ -92,20 +89,35 @@ public class AssetController : ControllerBase
     }
 
     [HttpGet("linked/{id}")]
-    [ProducesResponseType(typeof(RegisterResponse), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AssetDto), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    [AllowAnonymous]
     public async Task<IActionResult> GetLinkedAssets([FromRoute] int id)
     {
         IEnumerable<AssetDto> assets = await _assetService.GetLinkedAssets(id);
 
-        if (assets == null && assets.Any())
+        if (assets is null || assets.Any())
         {
             return NotFound();
         }
         return Ok(assets);
     }
 
+    [HttpGet("export/{id}")]
+    [ProducesResponseType(typeof(File), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
+    [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
+    [Authorize(Roles ="Admin")]
+    public async Task<IActionResult> ExportAsset([FromRoute] int id)
+    {
+        ExcelAssetDto data = await _assetService.Export(id);
+
+        return File(
+            fileContents: data.Content.ToArray(),
+            contentType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            fileDownloadName: data.Title
+        );
+    }
 }
