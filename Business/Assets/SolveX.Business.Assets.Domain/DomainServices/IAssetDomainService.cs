@@ -3,7 +3,7 @@
 namespace SolveX.Business.Assets.Domain.DomainServices;
 public interface IAssetDomainService
 {
-    public Task<int> Create(int id, string title, string data, IEnumerable<int> links);
+    public Task<int> Create(int id, string title, string data, IEnumerable<int> links, Dictionary<string, string> validations);
 
     public Task<Asset> Get(int id);
 
