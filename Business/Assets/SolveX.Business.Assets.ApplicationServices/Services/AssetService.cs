@@ -16,9 +16,9 @@ public class AssetService : IAssetService
         _mapper = mapper;
     }
 
-    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links)
+    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links, Dictionary<string, string> validations)
     {
-        return await _assetDomainService.Create(id, title, data, links);
+        return await _assetDomainService.Create(id, title, data, links, validations);
     }
 
     public async Task<ExcelAssetDto> Export(int id)
