@@ -97,7 +97,7 @@ public class AssetController : ControllerBase
     {
         IEnumerable<AssetDto> assets = await _assetService.GetLinkedAssets(id);
 
-        if (assets is null || assets.Any())
+        if (assets is null || !assets.Any())
         {
             return NotFound();
         }

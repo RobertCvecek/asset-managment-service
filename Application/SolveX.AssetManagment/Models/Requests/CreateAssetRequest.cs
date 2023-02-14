@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 
 namespace SolveX.AssetManagment.Models.Requests;
 
@@ -16,10 +17,10 @@ public class CreateAssetRequest
     /// <summary>
     /// Id's of assets that the current asset is linked to
     /// </summary>
-    public IEnumerable<int> Links { get; set; }
+    public IEnumerable<int> Links { get; set; } = Enumerable.Empty<int>();
 
     /// <summary>
     /// Key value pair containg property name and regex for its value validation
     /// </summary>
-    public Dictionary<string, string> Validations { get; set; }
+    public Dictionary<string, string> Validations { get; set; } = new Dictionary<string, string>();
 }
