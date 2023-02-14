@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
+using ServiceStack;
 using SolveX.Business.Assets.API.Dtos;
 using SolveX.Business.Assets.API.Services;
 using SolveX.Business.Assets.Domain.DomainServices;
+using SolveX.Framework.Utilities.Common;
+using System.IO;
+using System.Text.Json;
 
 namespace SolveX.Business.Assets.ApplicationServices.Services;
 public class AssetService : IAssetService
@@ -18,6 +22,22 @@ public class AssetService : IAssetService
     public async Task<int> Create(int id, string title, string data, IEnumerable<int> links)
     {
         return await _assetDomainService.Create(id, title, data, links);
+    }
+
+    public async Task<ExcelAssetDto> Export(int id)
+    {
+        AssetDto asset = _mapper.Map<AssetDto>(await _assetDomainService.Get(id));
+
+        return new()
+        {
+            Title = asset.Title,
+            Content = ExportUtilities.ExportExcel(new
+            {
+                Title = asset.Title,
+                Id = asset.Id.ToString(),
+                Data = asset.Data
+            })
+        };
     }
 
     public async Task<AssetDto> Get(int id)
