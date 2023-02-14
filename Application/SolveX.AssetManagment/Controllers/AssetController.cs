@@ -36,7 +36,7 @@ public class AssetController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> Create([FromBody]CreateAssetRequest request)
     {
-        int id = await _assetService.Create(request.Id, request.Title, request.Data, request.Links);
+        int id = await _assetService.Create(request.Id, request.Title, request.Data, request.Links, request.Validations);
         return Ok(id);
     }
 
