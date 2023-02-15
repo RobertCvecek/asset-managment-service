@@ -23,7 +23,7 @@ public class InjectionBasedTest
     /// </summary>
     /// <param name="models">Modules that contain all necessary components and mappings for successful injection</param>
     /// <param name="configuration">Optional configuration parameter</param>
-    public static void Init(ICollection<Autofac.Module> models,
+    public static IContainer Init(ICollection<Autofac.Module> models,
                             IConfiguration configuration = null,
                             IDictionary<Type, object> singletons = null,
                             List<Assembly> autoMapperConfigs = null)
@@ -77,6 +77,8 @@ public class InjectionBasedTest
         }
 
         _container = builder.Build();
+
+        return _container;
     }
 
     /// <summary>

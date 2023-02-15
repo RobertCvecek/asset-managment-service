@@ -2,6 +2,7 @@
 using SolveX.Business.Assets.API.Dtos;
 using SolveX.Business.Assets.API.Services;
 using SolveX.Business.Assets.Domain.DomainServices;
+using SolveX.Business.Assets.Domain.Models;
 using SolveX.Framework.Utilities.Common;
 
 namespace SolveX.Business.Assets.ApplicationServices.Services;
@@ -18,7 +19,12 @@ public class AssetService : IAssetService
 
     public async Task<int> Create(int id, string title, string data, IEnumerable<int> links, Dictionary<string, string> validations)
     {
-        return await _assetDomainService.Create(id, title, data, links, validations);
+        return await _assetDomainService.Create(new Asset()
+        {
+            Id = id,
+            Title = title,
+            Data = data,
+        }, links, validations);
     }
 
     public async Task<ExcelAssetDto> Export(int id)
