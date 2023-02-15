@@ -23,32 +23,32 @@ public class AssetDomainService : IAssetDomainService
         _assetRepository = assetRepository;
     }
 
-    public async Task<int> Create(int id, string title, string data, IEnumerable<int> links, Dictionary<string, string> validations)
+    public async Task<int> Create(Asset asset, IEnumerable<int> links, Dictionary<string, string> validations)
     {
-        if (await _assetRepository.GetAsync(id) is not null)
+        if (await _assetRepository.GetAsync(asset.Id) is not null)
         {
-            throw new BadDataException($"The asset with id [{id}] already exists");
+            throw new BadDataException($"The asset with id [{asset.Id}] already exists");
         }
 
-        if ((await _assetRepository.Query().Where(asset => asset.Title == title).ToListAsync()).FirstOrDefault() is not null)
+        if ((await _assetRepository.Query().Where(asset => asset.Title == asset.Title).ToListAsync()).FirstOrDefault() is not null)
         {
-            throw new BadDataException($"The asset with title [{title}] already exists");
-        }
-
-        var token = JToken.Parse(data);
-
-        if (token is JArray)
-        {
-            throw new BadDataException("The JSON should be an object not array");
+            throw new BadDataException($"The asset with title [{asset.Title}] already exists");
         }
 
         try
         {
-            JsonSerializer.Deserialize<object>(data);
+            JsonSerializer.Deserialize<object>(asset.Data);
         }
         catch
         {
             throw new BadDataException("The JSON is not valid");
+        }
+
+        var token = JToken.Parse(asset.Data);
+
+        if (token is JArray)
+        {
+            throw new BadDataException("The JSON should be an object not array");
         }
 
         foreach(int link in links)
@@ -70,7 +70,7 @@ public class AssetDomainService : IAssetDomainService
                 throw new BadDataException($"The regex {kvp.Value} for {kvp.Key} is not valid");
             }
 
-            string value = JsonHelpers.GetPropertyValue(data, kvp.Key);
+            string value = JsonHelpers.GetPropertyValue(asset.Data, kvp.Key);
 
             if(value == null)
             {
@@ -83,19 +83,19 @@ public class AssetDomainService : IAssetDomainService
             }
         }
 
-        await _assetRepository.InsertAsync(new Asset { Title = title, Data = data, Id = id });
+        await _assetRepository.InsertAsync(asset);
 
         if(links.Any())
         {
             await _assetConnectionRepository.InsertAsync(links.Select(link => new AssetConnection()
             {
-                AssetId = id,
-                ConnectedTo = link,
+                AssetId = asset.Id,
+                ConnectedTo = link
             }));
         }
         
 
-        return id;
+        return asset.Id;
     }
 
     public Task<Asset> Get(int id)
