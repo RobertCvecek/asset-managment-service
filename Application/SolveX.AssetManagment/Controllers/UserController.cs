@@ -36,6 +36,11 @@ public class UserController : ControllerBase
     {
         UserDto user = await _userService.Login(request.Username, request.Password);
 
+        if(user is null)
+        {
+            return NotFound();
+        }
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_securityOptions.IssuerSigningKey);
         var tokenDesk = new SecurityTokenDescriptor
