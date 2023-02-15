@@ -31,8 +31,9 @@ public class UserDomainService : IUserDomainService
 
         if(user is null)
         {
-            throw new DataNotFoundException("The user was not found");
+            return null;
         }
+
         if(_passwordHasher.VerifyHashedPassword(user, user.Password ,password) == PasswordVerificationResult.Failed)
         {
             throw new BadDataException("The provided password is not correct");

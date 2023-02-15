@@ -41,7 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Assets.Inte
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{3923020B-70A7-4295-A119-5E69DEC88317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Framework.Utilities.Common", "Framework\Utilities\SolveX.Framework.Utilities.Common\SolveX.Framework.Utilities.Common.csproj", "{77048D46-B9B3-42BB-8DD3-D745EC83F124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Framework.Utilities.Common", "Framework\Utilities\SolveX.Framework.Utilities.Common\SolveX.Framework.Utilities.Common.csproj", "{77048D46-B9B3-42BB-8DD3-D745EC83F124}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolveX.Business.Assets.UnitTests", "Business\Assets\SolveX.Business.Assets.UnitTests\SolveX.Business.Assets.UnitTests.csproj", "{F8BCA7C4-9E36-479B-93DB-517983A785DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolveX.Business.Assets.IntegrationTests", "Business\Assets\SolveX.Business.Assets.IntegrationTests\SolveX.Business.Assets.IntegrationTests.csproj", "{DC489BCF-92B8-4087-B295-50DDD704276A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +109,14 @@ Global
 		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77048D46-B9B3-42BB-8DD3-D745EC83F124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8BCA7C4-9E36-479B-93DB-517983A785DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8BCA7C4-9E36-479B-93DB-517983A785DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8BCA7C4-9E36-479B-93DB-517983A785DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8BCA7C4-9E36-479B-93DB-517983A785DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC489BCF-92B8-4087-B295-50DDD704276A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC489BCF-92B8-4087-B295-50DDD704276A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC489BCF-92B8-4087-B295-50DDD704276A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC489BCF-92B8-4087-B295-50DDD704276A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +139,8 @@ Global
 		{D8ED3D98-EB16-46CD-8CFE-08D58FD25BB3} = {215ACFAB-48F9-4795-8125-125B2E503438}
 		{3923020B-70A7-4295-A119-5E69DEC88317} = {D5874367-E8C6-40BE-AFC7-A1351AC4DD95}
 		{77048D46-B9B3-42BB-8DD3-D745EC83F124} = {3923020B-70A7-4295-A119-5E69DEC88317}
+		{F8BCA7C4-9E36-479B-93DB-517983A785DF} = {215ACFAB-48F9-4795-8125-125B2E503438}
+		{DC489BCF-92B8-4087-B295-50DDD704276A} = {215ACFAB-48F9-4795-8125-125B2E503438}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2D8E0E85-6101-4DBE-B549-AD83506703E2}
