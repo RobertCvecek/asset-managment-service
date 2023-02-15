@@ -77,7 +77,7 @@ public class AssetDomainService : IAssetDomainService
                 throw new BadDataException($"Property with name {kvp.Key} does not exist");
             }
 
-            if(!Regex.Match(value, kvp.Key).Success)
+            if(!Regex.Match(value, kvp.Value).Success)
             {
                 throw new BadDataException($"The property {kvp.Key} does not meet the crieteria of {kvp.Value}");
             }
