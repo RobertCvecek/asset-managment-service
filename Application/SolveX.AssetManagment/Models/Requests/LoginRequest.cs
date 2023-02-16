@@ -1,14 +1,18 @@
-﻿namespace SolveX.AssetManagment.Models.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SolveX.AssetManagment.Models.Requests;
 
 public class LoginRequest
 {
     /// <summary>
-    /// Users unique username
+    /// Users unique user name
     /// </summary>
-    public string Username { get; set; }
+    [Required]
+    public string Username { get; set; } = String.Empty;
 
     /// <summary>
     /// Users password
     /// </summary>
-    public string Password { get; set; }
+    [Required]
+    public string Password { get; set; } = String.Empty;
 }
