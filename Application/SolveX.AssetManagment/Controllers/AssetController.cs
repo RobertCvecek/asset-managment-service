@@ -1,20 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using SolveX.AssetManagment.Models.Requests;
-using SolveX.AssetManagment.Models.Responses;
 using SolveX.Business.Assets.API.Dtos;
 using SolveX.Business.Assets.API.Services;
-using SolveX.Business.Users.API.Dtos;
-using SolveX.Business.Users.API.Services;
 using SolveX.Framework.WebAPI.Models;
 using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
 using System.Net;
-using System.Reflection;
-using System.Security.Claims;
-using System.Text;
 
 namespace SolveX.FlowerSpot.Controllers;
 
@@ -29,12 +20,18 @@ public class AssetController : ControllerBase
         _assetService = assetService;
     }
 
+    /// <summary>
+    /// Endpoint for creating new assets
+    /// </summary>
+    /// <param name="request">The request containing asset info, its links and validations</param>
+    /// <returns>Id of created asset</returns>
+
     [HttpPost("create")]
     [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> Create([FromBody]CreateAssetRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateAssetRequest request)
     {
         int id = await _assetService.Create(request.Id, request.Title, request.Data, request.Links, request.Validations);
         return Ok(id);
@@ -49,7 +46,7 @@ public class AssetController : ControllerBase
     {
         AssetDto asset = await _assetService.Get(id);
 
-        if(asset is null)
+        if (asset is null)
         {
             return NotFound();
         }
@@ -109,7 +106,7 @@ public class AssetController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.NotFound)]
     [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> ExportAsset([FromRoute] int id)
     {
         ExcelAssetDto data = await _assetService.Export(id);
