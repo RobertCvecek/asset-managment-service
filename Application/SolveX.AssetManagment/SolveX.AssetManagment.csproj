@@ -1,34 +1,36 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />
-    <PackageReference Include="NLog" Version="5.1.1" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="7.1.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />
+		<PackageReference Include="NLog" Version="5.1.1" />
+		<PackageReference Include="NLog.Extensions.Logging" Version="5.2.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.API\SolveX.Business.Assets.API.csproj" />
-    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.ApplicationServices\SolveX.Business.Assets.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.Domain\SolveX.Business.Assets.Domain.csproj" />
-    <ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.Integration\SolveX.Business.Assets.Integration.csproj" />
-    <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj" />
-    <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.ApplicationServices\SolveX.Business.Users.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.Integration\SolveX.Business.Users.Integration.csproj" />
-    <ProjectReference Include="..\..\Framework\SolveX.Framework.Integration\SolveX.Framework.Integration.csproj" />
-    <ProjectReference Include="..\..\Framework\SolveX.Framework.WebAPI\SolveX.Framework.WebAPI.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.API\SolveX.Business.Assets.API.csproj" />
+		<ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.ApplicationServices\SolveX.Business.Assets.ApplicationServices.csproj" />
+		<ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.Domain\SolveX.Business.Assets.Domain.csproj" />
+		<ProjectReference Include="..\..\Business\Assets\SolveX.Business.Assets.Integration\SolveX.Business.Assets.Integration.csproj" />
+		<ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.API\SolveX.Business.Users.API.csproj" />
+		<ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.ApplicationServices\SolveX.Business.Users.ApplicationServices.csproj" />
+		<ProjectReference Include="..\..\Business\Users\SolveX.Business.Users.Integration\SolveX.Business.Users.Integration.csproj" />
+		<ProjectReference Include="..\..\Framework\SolveX.Framework.Integration\SolveX.Framework.Integration.csproj" />
+		<ProjectReference Include="..\..\Framework\SolveX.Framework.WebAPI\SolveX.Framework.WebAPI.csproj" />
+	</ItemGroup>
 
 </Project>

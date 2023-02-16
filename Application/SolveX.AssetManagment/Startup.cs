@@ -7,8 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Web;
-using SolveX.Business.Assets.ApplicationServices;
-using SolveX.Business.Assets.Domain;
 using SolveX.Business.Assets.Integration.Context;
 using SolveX.Business.Users.ApplicationServices;
 using SolveX.Business.Users.Domain;
@@ -17,7 +15,6 @@ using SolveX.Business.Users.Integration.Context;
 using SolveX.Framework.Integration;
 using SolveX.Framework.WebAPI.Middleware;
 using SolveX.Framework.WebAPI.Models;
-using System.Diagnostics.Metrics;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -110,6 +107,11 @@ public class Startup
                     new List<string>()
                 }
             });
+
+            // Set the comments path for the Swagger JSON and UI.
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            c.IncludeXmlComments(xmlPath);
         });
     }
 
@@ -155,7 +157,8 @@ public class Startup
             listOfAssemblies.Add(Assembly.Load(refAsmName));
         }
 
-        var config = new MapperConfiguration(cfg => {
+        var config = new MapperConfiguration(cfg =>
+        {
             cfg.AddMaps(listOfAssemblies);
         });
 
@@ -167,8 +170,8 @@ public class Startup
     {
         using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var userContext = serviceScope.ServiceProvider.GetService <UserContext> ();
-            var assetContext = serviceScope.ServiceProvider.GetService <AssetContext> ();
+            var userContext = serviceScope.ServiceProvider.GetService<UserContext>();
+            var assetContext = serviceScope.ServiceProvider.GetService<AssetContext>();
             userContext.Database.Migrate();
             assetContext.Database.Migrate();
         }
