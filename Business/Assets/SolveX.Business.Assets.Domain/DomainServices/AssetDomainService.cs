@@ -1,12 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.FileSystemGlobbing.Internal;
 using Newtonsoft.Json.Linq;
 using SolveX.Business.Assets.Domain.Models;
 using SolveX.Business.Assets.Domain.Repositories;
 using SolveX.Framework.Domain.Exceptions;
 using SolveX.Framework.Utilities.Common;
-using System.Numerics;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -19,10 +16,11 @@ public class AssetDomainService : IAssetDomainService
 
     public AssetDomainService(IAssetRepository assetRepository, IAssetConnectionRepository assetConnectionRepository)
     {
-        _assetConnectionRepository= assetConnectionRepository;
+        _assetConnectionRepository = assetConnectionRepository;
         _assetRepository = assetRepository;
     }
 
+    /// <inheritdoc/>
     public async Task<int> Create(Asset asset, IEnumerable<int> links, Dictionary<string, string> validations)
     {
         if (await _assetRepository.GetAsync(asset.Id) is not null)
@@ -51,7 +49,7 @@ public class AssetDomainService : IAssetDomainService
             throw new BadDataException("The JSON should be an object not array");
         }
 
-        foreach(int link in links)
+        foreach (int link in links)
         {
             if (await _assetRepository.GetAsync(link) is null)
             {
@@ -59,7 +57,7 @@ public class AssetDomainService : IAssetDomainService
             }
         }
 
-        foreach(KeyValuePair<string,string> kvp in validations)
+        foreach (KeyValuePair<string, string> kvp in validations)
         {
             try
             {
@@ -72,12 +70,12 @@ public class AssetDomainService : IAssetDomainService
 
             string value = JsonHelpers.GetPropertyValue(asset.Data, kvp.Key);
 
-            if(value == null)
+            if (value == null)
             {
                 throw new BadDataException($"Property with name {kvp.Key} does not exist");
             }
 
-            if(!Regex.Match(value, kvp.Value).Success)
+            if (!Regex.Match(value, kvp.Value).Success)
             {
                 throw new BadDataException($"The property {kvp.Key} does not meet the crieteria of {kvp.Value}");
             }
@@ -85,7 +83,7 @@ public class AssetDomainService : IAssetDomainService
 
         await _assetRepository.InsertAsync(asset);
 
-        if(links.Any())
+        if (links.Any())
         {
             await _assetConnectionRepository.InsertAsync(links.Select(link => new AssetConnection()
             {
@@ -93,7 +91,7 @@ public class AssetDomainService : IAssetDomainService
                 ConnectedTo = link
             }));
         }
-        
+
 
         return asset.Id;
     }
@@ -129,7 +127,7 @@ public class AssetDomainService : IAssetDomainService
     {
         List<AssetConnection> assetsConnections = await _assetConnectionRepository.Query().Where(assetConnection => assetConnection.AssetId == assetId).ToListAsync();
 
-        List<Asset> assets= new List<Asset>();
+        List<Asset> assets = new List<Asset>();
         foreach (AssetConnection assetConnection in assetsConnections)
         {
             assets.Add(await _assetRepository.GetAsync(assetConnection.ConnectedTo));
@@ -137,5 +135,5 @@ public class AssetDomainService : IAssetDomainService
         return assets;
     }
 
-   
+
 }
