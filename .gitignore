@@ -10,6 +10,8 @@ nupkg/
 
 **.vs
 
+**.db*
+
 # User-specific files
 *.log
 *.suo
